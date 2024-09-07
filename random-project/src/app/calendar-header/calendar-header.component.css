@@ -1,0 +1,60 @@
+mat-icon {
+  color: rgb(255, 0, 89);
+  font-size: 32px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: rgb(218, 220, 224) 1px solid;
+}
+
+.header-text {
+  color: rgb(60, 64, 67);
+  font-size: 1.5rem;
+}
+
+/* 
+.nav-controls {
+  display: flex;
+  align-items: center;
+}
+
+.nav-controls button {
+  background-color: white;
+  color: #4a90e2;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.nav-controls button:hover {
+  background-color: #357ab8;
+  color: white;
+}
+
+.date-selector input {
+  padding: 5px;
+  border-radius: 4px;
+  border: none;
+  margin-right: 15px;
+}
+
+.user-controls button {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 6px 12px;
+  margin-left: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-controls button:hover {
+  background-color: white;
+  color: #4a90e2;
+} */
