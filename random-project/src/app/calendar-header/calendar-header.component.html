@@ -1,14 +1,23 @@
 <header class="calendar-header">
   <div class="header-text">
-    <h1>Random Calendar App</h1>
+    <span>Random Calendar App</span>
   </div>
-  <button mat-button type="button">Today</button>
-  <button mat-icon-button type="button">
+  <button mat-button (click)="goToToday()" type="button">Today</button>
+  <button mat-icon-button (click)="goToPrevious()" type="button">
     <mat-icon>chevron_left</mat-icon>
   </button>
-  <button mat-icon-button type="button">
+  <button mat-icon-button (click)="goToNext()" type="button">
     <mat-icon>chevron_right</mat-icon>
   </button>
   <h2>Date</h2>
-  <div>View Selector</div>
+  <mat-form-field>
+    <mat-select
+      (selectionChange)="selectViewingMode($event.value)"
+      [value]="selectedMode"
+    >
+      <mat-option value="DAY">Day</mat-option>
+      <mat-option value="WEEK">Week</mat-option>
+      <mat-option value="MONTH">Month</mat-option>
+    </mat-select>
+  </mat-form-field>
 </header>

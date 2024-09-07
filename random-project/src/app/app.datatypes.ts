@@ -1,4 +1,4 @@
-class CalendarEvent {
+export class CalendarEvent {
   eventTitle: string;
   timeZone: string;
   description: string;
@@ -21,12 +21,12 @@ class CalendarEvent {
   }
 }
 
-class CalendarDay {
-  key: string; // Could be mm/dd/yy and we associate this key to a json of these values
-  events: CalendarEvent[];
-
-  constructor(key: string, events: CalendarEvent[]) {
+export class CalendarDay {
+  key: string = ''; // Could be mm/dd/yy and we associate this key to a json of these values
+  events: CalendarEvent[] = [];
+  date: Date;
+  constructor(key: string, date: Date) {
     this.key = key;
-    this.events = events;
+    this.date = date;
   }
 }
