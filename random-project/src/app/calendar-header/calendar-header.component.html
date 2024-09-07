@@ -1,23 +1,58 @@
-<header class="calendar-header">
-  <div class="header-text">
-    <span>Random Calendar App</span>
+<header>
+  <div class="calendar-header">
+    <div class="header-text">
+      <span>Random Calendar App</span>
+    </div>
+    <div class="header-controls">
+      <div class="left-controls">
+        <div class="header-buttons">
+          <button
+            mat-button
+            class="today-button"
+            (click)="goToToday()"
+            type="button"
+            matTooltip="This is a tooltip!"
+          >
+            Today
+          </button>
+          @let selectedMode = selectedMode$ | async;
+          <button
+            mat-icon-button
+            class="navigation-arrow-button"
+            type="button"
+            (click)="goToPrevious()"
+            [matTooltip]="getPreviousMatTooltipText(selectedMode)"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >chevron_left</mat-icon
+            >
+          </button>
+          <button
+            mat-icon-button
+            class="navigation-arrow-button"
+            type="button"
+            (click)="goToNext()"
+            [matTooltip]="getNextMatTooltipText(selectedMode)"
+          >
+            <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >chevron_right</mat-icon
+            >
+          </button>
+        </div>
+        <span class="date"
+          >{{ viewingMonthLong$ | async }} {{ viewingYear$ | async }}</span
+        >
+      </div>
+      <mat-form-field class="viewing-mode-selector" appearance="outline">
+        <mat-select
+          (selectionChange)="selectViewingMode($event.value)"
+          [value]="selectedMode"
+        >
+          <mat-option value="DAY">Day</mat-option>
+          <mat-option value="WEEK">Week</mat-option>
+          <mat-option value="MONTH">Month</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
-  <button mat-button (click)="goToToday()" type="button">Today</button>
-  <button mat-icon-button (click)="goToPrevious()" type="button">
-    <mat-icon>chevron_left</mat-icon>
-  </button>
-  <button mat-icon-button (click)="goToNext()" type="button">
-    <mat-icon>chevron_right</mat-icon>
-  </button>
-  <h2>Date</h2>
-  <mat-form-field>
-    <mat-select
-      (selectionChange)="selectViewingMode($event.value)"
-      [value]="selectedMode"
-    >
-      <mat-option value="DAY">Day</mat-option>
-      <mat-option value="WEEK">Week</mat-option>
-      <mat-option value="MONTH">Month</mat-option>
-    </mat-select>
-  </mat-form-field>
 </header>

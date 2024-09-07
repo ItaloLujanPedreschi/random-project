@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { RandomService } from '../random.service';
 import { DayView } from '../day-view/day-view.component';
 import { CalendarDay } from '../app.datatypes';
+import { MonthView } from '../month-view/month-view.component';
 //import data from 'datafile';
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [DayView],
+  imports: [DayView, MonthView],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

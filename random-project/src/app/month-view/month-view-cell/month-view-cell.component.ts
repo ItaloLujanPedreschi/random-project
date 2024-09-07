@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-month-view-cell',
+  selector: 'month-view-cell',
   standalone: true,
   imports: [],
   templateUrl: './month-view-cell.component.html',
-  styleUrl: './month-view-cell.component.css'
+  styleUrl: './month-view-cell.component.css',
 })
-export class MonthViewCellComponent {
-
+export class MonthViewCell {
+  @Input({ required: true }) dayNumber!: number;
+  @Input() monthName: string | undefined;
+  @Input() selected = false;
 }

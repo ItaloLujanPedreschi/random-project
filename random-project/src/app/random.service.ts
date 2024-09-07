@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { CalendarDay } from './app.datatypes';
 
 export type ViewingModes = 'DAY' | 'WEEK' | 'MONTH';
@@ -18,10 +18,8 @@ export class RandomService {
   currentDay = new Date().getDate();
   allCalendarDays = this.getAllDates(2024);
 
-  private viewingMode: ViewingModes = 'MONTH';
-  private viewingMonth: number | null = this.currentMonth;
-  private viewingDay: number | null = this.currentDay;
-  private viewingYear: number = 2024;
+  viewingMode$ = new BehaviorSubject<ViewingModes>('MONTH');
+  viewingDate$ = new BehaviorSubject<Date>(new Date());
 
   constructor(private http: HttpClient) {}
 
@@ -37,8 +35,12 @@ export class RandomService {
     return dates;
   }
 
+  getViewingDate(): Date {
+    return this.viewingDate$.getValue();
+  }
+
   next() {
-    switch (this.viewingMode) {
+    switch (this.viewingMode$.getValue()) {
       case 'DAY':
         break;
       case 'WEEK':
@@ -52,7 +54,7 @@ export class RandomService {
   }
 
   previous() {
-    switch (this.viewingMode) {
+    switch (this.viewingMode$.getValue()) {
       case 'DAY':
         break;
       case 'WEEK':
@@ -66,30 +68,30 @@ export class RandomService {
   }
 
   getViewingMode(): ViewingModes {
-    return this.viewingMode;
+    return this.viewingMode$.getValue();
   }
 
   setViewingMode(mode: ViewingModes) {
-    this.viewingMode = mode;
+    this.viewingMode$.next(mode);
   }
 
   private viewNextMonth(): void {
-    if (this.viewingMonth) {
-      this.viewingMonth = this.viewingMonth++;
+    const newDate = this.viewingDate$.getValue();
+    const newMonth = newDate.getMonth() + 1;
+    newDate.setMonth(newMonth);
+    if (newMonth === 12) {
+      newDate.setFullYear(newDate.getFullYear() + 1, 0);
     }
-    if (this.viewingMonth === 12) {
-      this.viewingMonth = 0;
-      this.viewingYear++;
-    }
+    this.viewingDate$.next(newDate);
   }
 
   private viewPreviousMonth(): void {
-    if (this.viewingMonth) {
-      this.viewingMonth = this.viewingMonth--;
+    const newDate = this.viewingDate$.getValue();
+    const newMonth = newDate.getMonth() - 1;
+    newDate.setMonth(newMonth);
+    if (newMonth === -1) {
+      newDate.setFullYear(newDate.getFullYear() - 1, 11);
     }
-    if (this.viewingMonth === -1) {
-      this.viewingMonth = 11;
-      this.viewingYear--;
-    }
+    this.viewingDate$.next(newDate);
   }
 }
